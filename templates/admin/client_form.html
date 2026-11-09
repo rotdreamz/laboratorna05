@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ 'Редагувати клієнта' if client else 'Новий клієнт' }}</h1>
+<form method="post">
+    <label>Ім'я
+        <input type="text" name="name" value="{{ client['name'] if client else '' }}" required>
+    </label>
+    <label>Email
+        <input type="email" name="email" value="{{ client['email'] if client else '' }}" required>
+    </label>
+    <label>Телефон
+        <input type="text" name="phone" value="{{ client['phone'] or '' if client else '' }}">
+    </label>
+    <button type="submit">Зберегти</button>
+    <a href="{{ url_for('admin.clients') }}">Скасувати</a>
+</form>
+{% endblock %}

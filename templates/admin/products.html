@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Товари</h1>
+<p><a href="{{ url_for('admin.index') }}">← Назад</a> |
+   <a href="{{ url_for('admin.product_new') }}">+ Додати товар</a></p>
+{% if products %}
+<table>
+    <tr><th>ID</th><th>Назва</th><th>Опис</th><th>Ціна</th><th>Залишок</th><th></th></tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p['id'] }}</td>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['description'] }}</td>
+        <td>{{ p['price'] }}</td>
+        <td>{{ p['stock'] }}</td>
+        <td>
+            <a href="{{ url_for('admin.product_edit', id=p['id']) }}">Редагувати</a>
+            <form method="post" action="{{ url_for('admin.product_delete', id=p['id']) }}" style="display:inline">
+                <button type="submit">Видалити</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Товарів поки немає.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Каталог</h1>
+{% if products %}
+<div class="catalog">
+    {% for p in products %}
+    <div class="item">
+        {% if p['delivery'] == 0 %}
+        <span class="badge">Доставка 0₴</span>
+        {% endif %}
+        <div class="item-img">
+            {% if p['image'] %}
+                <img src="{{ p['image'] }}" alt="{{ p['name'] }}">
+            {% else %}
+                <div class="no-image">🍋</div>
+            {% endif %}
+        </div>
+        <div class="item-name">{{ p['name'] }}</div>
+        <div class="item-desc">{{ p['description'] }}</div>
+        <div class="item-bottom">
+            {% if p['sale_price'] is not none and p['sale_price'] < p['price'] %}
+            <div>
+                <div class="old-row">
+                    <span class="old-price">{{ '%g' % p['price'] }} ₴</span>
+                    <span class="discount">-{{ (100 - p['sale_price'] / p['price'] * 100) | round | int }}%</span>
+                </div>
+                <div class="item-price sale-{{ p['sale_color'] }}">{{ '%g' % p['sale_price'] }} ₴</div>
+            </div>
+            {% else %}
+            <div class="item-price">{{ '%g' % p['price'] }} ₴</div>
+            {% endif %}
+
+            {% if p['stock'] > 0 %}
+            <form method="post" action="{{ url_for('shop.add_to_cart', product_id=p['id']) }}">
+                <button type="submit" class="cart-btn" title="У кошик">🛒</button>
+            </form>
+            {% else %}
+            <span class="out-of-stock">Немає в наявності</span>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Товарів поки немає. Додайте їх в адмін-панелі.</p>
+{% endif %}
+{% endblock %}

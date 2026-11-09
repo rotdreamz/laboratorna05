@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Кав'ярня</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <nav>
+            <a class="brand" href="{{ url_for('index') }}">🍋 Лимон</a>
+            <a href="{{ url_for('shop.shop') }}">Магазин</a>
+            <a href="{{ url_for('shop.cart') }}">Кошик</a>
+            <a href="{{ url_for('feedback.feedback') }}">Відгуки</a>
+            <a href="{{ url_for('admin.index') }}">Адмін-панель</a>
+        </nav>
+    </header>
+
+    <main>
+        {% for m in get_flashed_messages() %}
+            <div class="flash">{{ m }}</div>
+        {% endfor %}
+
+        {% block content %}
+            <h1>🍋 Лимон: чистота без зайвих витрат</h1>
+            <p>Побутова хімія та товари для дому за доброю ціною.</p>
+        {% endblock %}
+    </main>
+</body>
+</html>

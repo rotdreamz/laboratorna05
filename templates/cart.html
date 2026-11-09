@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Кошик</h1>
+{% if items %}
+<table>
+    <tr><th>Товар</th><th>Ціна</th><th>Кількість</th><th>Сума</th></tr>
+    {% for i in items %}
+    <tr>
+        <td>{{ i.product['name'] }}</td>
+        <td>{{ i.product['price'] }} грн</td>
+        <td>{{ i.qty }}</td>
+        <td>{{ i.product['price'] * i.qty }} грн</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><strong>Разом: {{ total }} грн</strong></p>
+
+<h2>Оформлення замовлення</h2>
+<form method="post" action="{{ url_for('shop.checkout') }}">
+    <label>Ім'я
+        <input type="text" name="name" required>
+    </label>
+    <label>Email
+        <input type="email" name="email" required>
+    </label>
+    <label>Телефон
+        <input type="text" name="phone">
+    </label>
+    <button type="submit">Замовити</button>
+</form>
+{% else %}
+<p>Кошик порожній. <a href="{{ url_for('shop.shop') }}">Перейти до магазину</a></p>
+{% endif %}
+{% endblock %}

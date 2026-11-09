@@ -1,0 +1,309 @@
+/* ===== Кольори сайту (змінюй тут, щоб перефарбувати весь сайт) ===== */
+:root {
+    --bg: #fffdf0;          /* фон сторінки */
+    --card: #ffffff;        /* фон блоку з вмістом */
+    --green: #2f6b2a;       /* шапка, заголовки таблиць */
+    --accent: #3f9a36;      /* кнопки */
+    --accent-dark: #2f7a29; /* кнопки при наведенні, посилання */
+    --lemon: #ffe14d;       /* лимонно-жовтий акцент */
+    --border: #eee6b8;
+    --danger: #b3382c;
+    --text: #22301f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* ===== Шапка та навігація ===== */
+header.site-header {
+    background: var(--green);
+    border-bottom: 4px solid var(--lemon);
+    padding: 14px 20px;
+}
+
+header.site-header nav {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.brand {
+    color: var(--lemon);
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+header.site-header nav a:not(.brand) {
+    color: #fff5b8;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+header.site-header nav a:not(.brand):hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+/* ===== Основний блок ===== */
+main {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+h1 { margin-top: 0; color: var(--green); }
+h2 { color: var(--green); }
+
+a { color: var(--accent-dark); }
+
+/* ===== Повідомлення (flash) ===== */
+.flash {
+    background: #fff9c4;
+    border-left: 4px solid var(--lemon);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+/* ===== Таблиці ===== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 12px;
+}
+
+th {
+    background: var(--green);
+    color: #fff;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+tr:nth-child(even) td { background: #fffbe0; }
+tr:hover td { background: #fff3b0; }
+
+/* ===== Форми ===== */
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+input, textarea, select {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font: inherit;
+    background: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--accent);
+    border-color: var(--accent);
+}
+
+/* select у таблиці замовлень не має бути на всю ширину */
+td select { display: inline-block; width: auto; }
+
+/* ===== Кнопки ===== */
+button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 12px;
+    border-radius: 6px;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:hover { background: var(--accent-dark); }
+
+/* у таблицях кнопки без верхнього відступу */
+td button { margin-top: 0; padding: 5px 12px; }
+
+/* кнопки видалення автоматично червоні (за адресою форми) */
+form[action*="delete"] button { background: var(--danger); }
+form[action*="delete"] button:hover { background: #8f2c22; }
+
+/* ===== Мініатюра в адмінці ===== */
+.thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* ===== Каталог (картки як у великих магазинах) ===== */
+main:has(.catalog) {
+    max-width: 1250px;
+    border: none;
+    background: transparent;
+    padding: 0 24px;
+}
+
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.item {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.item:hover {
+    border-color: var(--border);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #fff3b0;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.item-img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 28px 0 14px;
+}
+
+.item-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.no-image {
+    font-size: 4rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fffbe0;
+    border-radius: 8px;
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.item-desc {
+    font-size: 0.95rem;
+    color: #444;
+    margin-top: 2px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.item-stock {
+    font-size: 0.8rem;
+    color: #7a8a76;
+    margin-top: 8px;
+}
+
+.item-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.item-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.cart-btn {
+    margin: 0;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    font-size: 1.3rem;
+    background: #fff;
+    color: var(--text);
+    border: 2px solid var(--text);
+    border-radius: 10px;
+}
+
+.cart-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ===== Малі екрани ===== */
+@media (max-width: 700px) {
+    main { margin: 12px; padding: 14px; }
+    main:has(.catalog) { padding: 0 8px; }
+    table { display: block; overflow-x: auto; }
+}
+
+/* ===== Акція ===== */
+.old-row { display: flex; align-items: center; gap: 6px; }
+
+.old-price {
+    color: #8a8a8a;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.discount {
+    background: #ffd6d1;
+    color: #b3382c;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 6px;
+}
+
+.item-price.sale-red { color: #b3382c; }
+.item-price.sale-black { color: var(--text); }
+
+.out-of-stock { font-size: 0.85rem; color: #b3382c; font-weight: 600; }

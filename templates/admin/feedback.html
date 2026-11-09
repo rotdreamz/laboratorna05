@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Відгуки</h1>
+<p><a href="{{ url_for('admin.index') }}">← Назад</a></p>
+{% if items %}
+<table>
+    <tr><th>ID</th><th>Ім'я</th><th>Email</th><th>Повідомлення</th><th>Дата</th><th></th></tr>
+    {% for f in items %}
+    <tr>
+        <td>{{ f['id'] }}</td>
+        <td>{{ f['name'] }}</td>
+        <td>{{ f['email'] }}</td>
+        <td>{{ f['message'] }}</td>
+        <td>{{ f['created_at'] }}</td>
+        <td>
+            <form method="post" action="{{ url_for('admin.feedback_delete', id=f['id']) }}">
+                <button type="submit">Видалити</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Відгуків поки немає.</p>
+{% endif %}
+{% endblock %}

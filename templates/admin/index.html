@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Адмін-панель</h1>
+<ul>
+    <li><a href="{{ url_for('admin.feedback_list') }}">Відгуки</a></li>
+    <li><a href="{{ url_for('admin.products') }}">Товари</a></li>
+    <li><a href="{{ url_for('admin.orders') }}">Замовлення</a></li>
+    <li><a href="{{ url_for('admin.clients') }}">Клієнти</a></li>
+</ul>
+{% endblock %}
