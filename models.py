@@ -137,10 +137,11 @@ def get_product(product_id):
 def add_product(name, description, price, stock, image=None, delivery=0,
                 sale_price=None, sale_color='red'):
     db = get_db()
-    db.execute('INSERT INTO products (name, description, price, stock, image, '
-               'delivery, sale_price, sale_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-               (name, description, price, stock, image, delivery, sale_price, sale_color))
+    cur = db.execute('INSERT INTO products (name, description, price, stock, image, '
+                     'delivery, sale_price, sale_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                     (name, description, price, stock, image, delivery, sale_price, sale_color))
     db.commit()
+    return cur.lastrowid
 
 
 def update_product(product_id, name, description, price, stock, image=None,
